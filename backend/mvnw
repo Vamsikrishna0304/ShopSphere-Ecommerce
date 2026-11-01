@@ -1,0 +1,17 @@
+#!/bin/sh
+# ----------------------------------------------------------------------------
+# Maven Wrapper script for Unix/Linux/macOS
+# ----------------------------------------------------------------------------
+set -e
+MAVEN_VERSION="3.9.9"
+WRAPPER_DIR="$HOME/.m2/wrapper/dists/apache-maven-$MAVEN_VERSION"
+
+if [ ! -f "$WRAPPER_DIR/bin/mvn" ]; then
+    echo "Downloading Apache Maven $MAVEN_VERSION..."
+    mkdir -p "$HOME/.m2/wrapper/dists"
+    ZIP="$HOME/.m2/wrapper/dists/apache-maven-$MAVEN_VERSION-bin.zip"
+    curl -fsSL "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/$MAVEN_VERSION/apache-maven-$MAVEN_VERSION-bin.zip" -o "$ZIP"
+    unzip -q -o "$ZIP" -d "$HOME/.m2/wrapper/dists"
+fi
+
+exec "$WRAPPER_DIR/bin/mvn" "$@"
